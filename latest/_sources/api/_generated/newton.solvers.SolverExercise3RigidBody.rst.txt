@@ -1,0 +1,8 @@
+﻿newton.solvers.SolverExercise3RigidBody
+=======================================
+
+.. autoclass:: newton.solvers.SolverExercise3RigidBody
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: groupwise

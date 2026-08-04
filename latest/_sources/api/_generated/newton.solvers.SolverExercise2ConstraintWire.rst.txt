@@ -1,0 +1,8 @@
+﻿newton.solvers.SolverExercise2ConstraintWire
+============================================
+
+.. autoclass:: newton.solvers.SolverExercise2ConstraintWire
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: groupwise

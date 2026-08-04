@@ -1,0 +1,8 @@
+﻿newton.solvers.SolverExercise5Fluid
+===================================
+
+.. autoclass:: newton.solvers.SolverExercise5Fluid
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: groupwise

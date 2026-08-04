@@ -1,0 +1,8 @@
+﻿newton.solvers.SolverExercise1ODECannonBall
+===========================================
+
+.. autoclass:: newton.solvers.SolverExercise1ODECannonBall
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: groupwise

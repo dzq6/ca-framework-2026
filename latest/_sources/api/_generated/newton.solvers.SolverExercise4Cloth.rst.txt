@@ -1,0 +1,8 @@
+﻿newton.solvers.SolverExercise4Cloth
+===================================
+
+.. autoclass:: newton.solvers.SolverExercise4Cloth
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: groupwise

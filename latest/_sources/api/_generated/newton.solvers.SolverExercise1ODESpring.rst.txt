@@ -1,0 +1,8 @@
+﻿newton.solvers.SolverExercise1ODESpring
+=======================================
+
+.. autoclass:: newton.solvers.SolverExercise1ODESpring
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: groupwise

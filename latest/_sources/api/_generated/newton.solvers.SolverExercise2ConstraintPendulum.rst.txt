@@ -1,0 +1,8 @@
+﻿newton.solvers.SolverExercise2ConstraintPendulum
+================================================
+
+.. autoclass:: newton.solvers.SolverExercise2ConstraintPendulum
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :member-order: groupwise
