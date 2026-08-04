@@ -526,8 +526,12 @@ class SmokeVolumeRenderer:
         camera_front = np.asarray(camera.get_front(), dtype=np.float32)
         camera_right = np.asarray(camera.get_right(), dtype=np.float32)
         camera_up = np.asarray(camera.get_up(), dtype=np.float32)
-        gl.glUniform3f(uniforms["camera_front_world"], float(camera_front[0]), float(camera_front[1]), float(camera_front[2]))
-        gl.glUniform3f(uniforms["camera_right_world"], float(camera_right[0]), float(camera_right[1]), float(camera_right[2]))
+        gl.glUniform3f(
+            uniforms["camera_front_world"], float(camera_front[0]), float(camera_front[1]), float(camera_front[2])
+        )
+        gl.glUniform3f(
+            uniforms["camera_right_world"], float(camera_right[0]), float(camera_right[1]), float(camera_right[2])
+        )
         gl.glUniform3f(uniforms["camera_up_world"], float(camera_up[0]), float(camera_up[1]), float(camera_up[2]))
         gl.glUniform3f(uniforms["volume_min_world"], *self.world_min)
         gl.glUniform3f(uniforms["volume_max_world"], *self.world_max)
@@ -546,7 +550,9 @@ class SmokeVolumeRenderer:
         gl.glUniform1f(uniforms["light_strength"], self.light_strength)
         gl.glUniform1f(uniforms["anisotropy"], self.anisotropy)
         gl.glUniform1f(uniforms["tan_half_fov"], float(np.tan(np.deg2rad(float(camera.fov)) * 0.5)))
-        gl.glUniform1f(uniforms["aspect_ratio"], float(renderer._screen_width) / max(float(renderer._screen_height), 1.0))
+        gl.glUniform1f(
+            uniforms["aspect_ratio"], float(renderer._screen_width) / max(float(renderer._screen_height), 1.0)
+        )
         gl.glUniform1f(uniforms["step_size_world"], step_size_world)
         gl.glUniform1f(uniforms["shadow_step_world"], shadow_step_world)
         gl.glUniform1i(uniforms["max_steps"], max_steps)

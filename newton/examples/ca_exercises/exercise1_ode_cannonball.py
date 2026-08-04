@@ -1,8 +1,8 @@
-﻿import numpy as np
 import warp as wp
 
 import newton
 import newton.examples
+
 
 class Exercise1ODECannonBall:
     def __init__(self, viewer, args):
@@ -42,8 +42,8 @@ class Exercise1ODECannonBall:
 
         self.viewer.set_model(self.model)
 
-        self.method = 0 # 0: Analytic, 1: Explicit Euler, 2: Semi-Implicit Euler, 3: Mid-Point, 4: RK4
-        
+        self.method = 0  # 0: Analytic, 1: Explicit Euler, 2: Semi-Implicit Euler, 3: Mid-Point, 4: RK4
+
         # Trajectory tracking
         self.trajectory_interval = 0.05
         self.last_trajectory_time = 0.0
@@ -52,7 +52,9 @@ class Exercise1ODECannonBall:
         self.trajectory_colors = []
 
     def gui(self, ui):
-        _changed, self.method = ui.combo("Method", self.method, ["Analytic", "Explicit Euler", "Semi-Implicit Euler", "Mid-Point", "RK4"])
+        _changed, self.method = ui.combo(
+            "Method", self.method, ["Analytic", "Explicit Euler", "Semi-Implicit Euler", "Mid-Point", "RK4"]
+        )
         if ui.button("Reset"):
             self.reset()
 
@@ -74,7 +76,7 @@ class Exercise1ODECannonBall:
             self.solver.step(self.state_0, self.state_1, self.control, self.contacts, self.sim_dt)
             self.state_0, self.state_1 = self.state_1, self.state_0
         self.sim_time += self.frame_dt
-        
+
         # Record trajectory point at intervals
         if self.sim_time - self.last_trajectory_time >= self.trajectory_interval:
             body_pos = self.state_0.body_q.numpy()[self.body]
@@ -86,7 +88,7 @@ class Exercise1ODECannonBall:
     def render(self):
         self.viewer.begin_frame(self.sim_time)
         self.viewer.log_state(self.state_0)
-        
+
         # Draw trajectory points
         if len(self.trajectory_points) > 0:
             self.viewer.log_points(
@@ -95,7 +97,7 @@ class Exercise1ODECannonBall:
                 radii=wp.array(self.trajectory_radii, dtype=wp.float32),
                 colors=wp.array(self.trajectory_colors, dtype=wp.vec3),
             )
-        
+
         self.viewer.end_frame()
 
 

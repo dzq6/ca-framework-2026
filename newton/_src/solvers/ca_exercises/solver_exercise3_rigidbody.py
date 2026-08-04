@@ -1,12 +1,11 @@
 # pyright: reportInvalidTypeForm=false
 
+
 import numpy as np
 import warp as wp
-from pathlib import Path
 
 from ...core.types import override
-from ...geometry.broad_phase_common import check_aabb_overlap, is_pair_excluded, test_world_and_group_pair
-from ...geometry.flags import ShapeFlags
+from ...geometry.broad_phase_common import check_aabb_overlap
 from ...geometry.narrow_phase import NarrowPhase
 from ...geometry.types import GeoType
 from ...sim import Contacts, Control, Model, State
@@ -372,7 +371,9 @@ class SolverExercise3RigidBody(SolverBase):
         self.contact_lambda_n = wp.zeros(self.max_candidate_pairs, dtype=float, device=model.device)
         self.contact_lambda_t = wp.zeros(self.max_candidate_pairs, dtype=float, device=model.device)
 
-    def _integrate_bodies(self, model: Model, state_in: State, state_out: State, dt: float, angular_damping: float) -> None:
+    def _integrate_bodies(
+        self, model: Model, state_in: State, state_out: State, dt: float, angular_damping: float
+    ) -> None:
         wp.launch(
             kernel=integrate_bodies_kernel,
             dim=model.body_count,
@@ -380,7 +381,7 @@ class SolverExercise3RigidBody(SolverBase):
                 model.body_count,
                 state_in.body_q,
                 state_in.body_qd,
-                state_out.body_q, 
+                state_out.body_q,
                 state_out.body_qd,
                 model.body_inv_mass,
                 self.gravity,
@@ -411,7 +412,7 @@ class SolverExercise3RigidBody(SolverBase):
             outputs=[self.shape_aabb_lower, self.shape_aabb_upper],
             device=self.device,
         )
-        
+
         if self._bvh is None:
             self._bvh = wp.Bvh(self.shape_aabb_lower, self.shape_aabb_upper, groups=self.model.shape_world)
         else:
@@ -547,7 +548,7 @@ class SolverExercise3RigidBody(SolverBase):
 
         # 3) Sequential impulse iterations on rigid contact constraints.
         self._solve_contacts(state_out, my_contacts, dt)
-        
+
     @override
     def update_contacts(self, contacts: Contacts) -> None:
         # Contacts are written directly in _detect_contacts().

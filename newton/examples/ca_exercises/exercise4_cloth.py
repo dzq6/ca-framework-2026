@@ -1,32 +1,35 @@
+import time
+
 import warp as wp
 
 import newton
 import newton.examples
-import time
 
 
 class Exercise4Cloth:
     def __init__(self, viewer, args):
         self.fps = 100
         self.frame_dt = 1.0 / self.fps
+        # Stiffer cloth needs smaller dt; keep sim_dt in sync with substeps
         self.sim_substeps = 4
         self.sim_dt = self.frame_dt / self.sim_substeps
         self.sim_time = 0.0
 
         # Cloth grid parameters
-        self.grid_n = 16
-        self.grid_m = 16
+        self.grid_n = 48
+        self.grid_m = 48
         self.cell_size = 0.15
         self.particle_mass = 1.0
 
-        # Spring parameters
-        self.k_struct = 500.0
-        self.k_bend = 60.0
-        self.k_shear = 50.0
-        self.damping = 10.0
+        # Cloth-like: stiff stretch, soft bend, strong damping (settle, not bounce)
+        # Critical damping ~ 2*sqrt(k*m) ≈ 77 for k=1500; use a sizable fraction of that.
+        self.k_struct = 1500.0
+        self.k_shear = 120.0
+        self.k_bend = 20.0
+        self.damping = 45.0
 
-        # Integration method (0=explicit, 1=implicit, 2=semi-implicit)
-        self.method = 0
+        # Integration method (0=explicit, 1=implicit, 2=semi-implicit, 3=mid, 4=rk4)
+        self.method = 2
 
         self.viewer = viewer
         self.viewer._paused = True
@@ -50,8 +53,11 @@ class Exercise4Cloth:
                 "k_struct": self.k_struct,
                 "k_bend": self.k_bend,
                 "k_shear": self.k_shear,
-                "damping": self.damping
-            }
+                "damping": self.damping,
+                # Fix a strip from each top corner (use grid_m to pin the whole top edge)
+                "pin_width": 9,
+                "pin_rows": 3,
+            },
         )
 
         self.state_0 = self.model.state()
@@ -88,7 +94,7 @@ class Exercise4Cloth:
         _changed, self.method = ui.combo(
             "Method",
             self.method,
-            ["Explicit Euler", "Implicit Euler", "Semi-Implicit Euler"],
+            ["Explicit Euler", "Implicit Euler", "Semi-Implicit Euler", "Mid-Point", "RK4"],
         )
         self.solver.method = self.method
 

@@ -49,10 +49,7 @@ class Exercise3RigidBody:
         self.model = builder.finalize()
 
         self.solver = newton.solvers.SolverExercise3RigidBody(
-            self.model,
-            iterations=self.iterations,
-            baumgarte=self.baumgarte,
-            angular_damping=self.angular_damping
+            self.model, iterations=self.iterations, baumgarte=self.baumgarte, angular_damping=self.angular_damping
         )
 
         self.state_0 = self.model.state()

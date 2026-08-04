@@ -2,10 +2,11 @@ import warp as wp
 
 import newton
 import newton.examples
-
 from newton._src.solvers.ca_exercises.fluid_viewer import (
     FluidViewerGL,
     SmokeVolumeRenderer,
+)
+from newton._src.solvers.ca_exercises.fluid_viewer import (
     init as fluid_init,
 )
 

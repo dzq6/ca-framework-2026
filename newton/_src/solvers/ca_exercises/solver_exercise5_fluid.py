@@ -6,7 +6,6 @@ from ...core.types import override
 from ...sim import Contacts, Control, Model, State
 from ..solver import SolverBase
 
-
 # ---------------------------------------------------------------------------
 # Kernels
 # ---------------------------------------------------------------------------
@@ -33,6 +32,7 @@ def apply_density_source_kernel(
 
 
 # ----- Sampling helpers (semi-Lagrangian advection) -----
+
 
 @wp.func
 def sample_centered_clamped(
@@ -96,9 +96,8 @@ def fill_solid_box_kernel(
     box_max: wp.vec3i,
 ):
     i, j, k = wp.tid()
-    
-    # TODO
-    # Fill the solid array with 1s inside the box defined by box_min and box_max.
+    if i >= box_min[0] and i < box_max[0] and j >= box_min[1] and j < box_max[1] and k >= box_min[2] and k < box_max[2]:
+        solid[i, j, k] = 1
 
 
 @wp.kernel
@@ -112,7 +111,6 @@ def add_buoyancy_kernel(
     ny: int,
     nz: int,
 ):
-    
     i, j, k = wp.tid()
 
     # TODO
@@ -145,7 +143,7 @@ def enforce_solid_velocity_u_kernel(
     nz: int,
 ):
     i, j, k = wp.tid()
-    
+
     # TODO: Enforce solid boundary conditions on the x-face velocity u.
 
 
@@ -158,7 +156,7 @@ def enforce_solid_velocity_v_kernel(
     nz: int,
 ):
     i, j, k = wp.tid()
-    
+
     # TODO: Enforce solid boundary conditions on the y-face velocity v.
 
 
@@ -171,8 +169,8 @@ def enforce_solid_velocity_w_kernel(
     nz: int,
 ):
     i, j, k = wp.tid()
-    
-    # TODO: Enforce solid boundary conditions on the z-face velocity w. 
+
+    # TODO: Enforce solid boundary conditions on the z-face velocity w.
 
 
 @wp.kernel
@@ -185,7 +183,7 @@ def compute_divergence_kernel(
     divergence: wp.array3d(dtype=float),
 ):
     i, j, k = wp.tid()
-    
+
     # TODO: Compute the divergence of the velocity field at cell (i, j, k)
 
 
@@ -221,7 +219,7 @@ def project_velocity_u_kernel(
     nz: int,
 ):
     i, j, k = wp.tid()
-    
+
     # TODO: Project the x-face velocity u by subtracting the pressure gradient.
 
 
@@ -237,7 +235,7 @@ def project_velocity_v_kernel(
     nz: int,
 ):
     i, j, k = wp.tid()
-    
+
     # TODO: Project the y-face velocity v by subtracting the pressure gradient.
 
 
@@ -253,7 +251,7 @@ def project_velocity_w_kernel(
     nz: int,
 ):
     i, j, k = wp.tid()
-    
+
     # TODO: Project the z-face velocity w by subtracting the pressure gradient.
 
 

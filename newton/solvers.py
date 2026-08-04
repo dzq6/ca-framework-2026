@@ -113,6 +113,13 @@ Supported Features
 # solver types
 from ._src.solvers import (
     SolverBase,
+    SolverExercise1ODECannonBall,
+    SolverExercise1ODESpring,
+    SolverExercise2ConstraintPendulum,
+    SolverExercise2ConstraintWire,
+    SolverExercise3RigidBody,
+    SolverExercise4Cloth,
+    SolverExercise5Fluid,
     SolverFeatherstone,
     SolverImplicitMPM,
     SolverMuJoCo,
@@ -121,13 +128,6 @@ from ._src.solvers import (
     SolverVBD,
     SolverXPBD,
     style3d,
-    SolverExercise1ODECannonBall,
-    SolverExercise1ODESpring,
-    SolverExercise2ConstraintWire,
-    SolverExercise2ConstraintPendulum,
-    SolverExercise3RigidBody,
-    SolverExercise4Cloth,
-    SolverExercise5Fluid,
 )
 
 # solver flags
@@ -135,6 +135,13 @@ from ._src.solvers.flags import SolverNotifyFlags
 
 __all__ = [
     "SolverBase",
+    "SolverExercise1ODECannonBall",
+    "SolverExercise1ODESpring",
+    "SolverExercise2ConstraintPendulum",
+    "SolverExercise2ConstraintWire",
+    "SolverExercise3RigidBody",
+    "SolverExercise4Cloth",
+    "SolverExercise5Fluid",
     "SolverFeatherstone",
     "SolverImplicitMPM",
     "SolverMuJoCo",
@@ -144,11 +151,4 @@ __all__ = [
     "SolverVBD",
     "SolverXPBD",
     "style3d",
-    "SolverExercise1ODECannonBall",
-    "SolverExercise1ODESpring",
-    "SolverExercise2ConstraintWire",
-    "SolverExercise2ConstraintPendulum",
-    "SolverExercise3RigidBody",
-    "SolverExercise4Cloth",
-    "SolverExercise5Fluid",
 ]

@@ -1,8 +1,8 @@
-import numpy as np
 import warp as wp
 
 import newton
 import newton.examples
+
 
 class Exercise2ConstraintWire:
     def __init__(self, viewer, args):
@@ -38,7 +38,7 @@ class Exercise2ConstraintWire:
         self.initial_state.assign(self.state_0)
 
         self.viewer.set_model(self.model)
-        
+
         # Trajectory tracking
         self.trajectory_interval = 0.05  # seconds between trajectory points [s]
         self.last_trajectory_time = 0.0
@@ -67,7 +67,7 @@ class Exercise2ConstraintWire:
             self.solver.step(self.state_0, self.state_1, self.control, self.contacts, self.sim_dt)
             self.state_0, self.state_1 = self.state_1, self.state_0
         self.sim_time += self.frame_dt
-        
+
         # Record trajectory point at intervals
         if self.sim_time - self.last_trajectory_time >= self.trajectory_interval:
             body_pos = self.state_0.body_q.numpy()[self.body]
@@ -79,7 +79,7 @@ class Exercise2ConstraintWire:
     def render(self):
         self.viewer.begin_frame(self.sim_time)
         self.viewer.log_state(self.state_0)
-        
+
         # Draw trajectory points
         if len(self.trajectory_points) > 0:
             self.viewer.log_points(
@@ -88,7 +88,7 @@ class Exercise2ConstraintWire:
                 radii=wp.array(self.trajectory_radii, dtype=wp.float32),
                 colors=wp.array(self.trajectory_colors, dtype=wp.vec3),
             )
-        
+
         self.viewer.end_frame()
 
 
