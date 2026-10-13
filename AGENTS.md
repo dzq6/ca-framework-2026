@@ -181,3 +181,12 @@ To debug Warp kernel behavior:
 1. **Write a standalone reproduction script** and run it directly with `uv run python -c "..."` or `uv run python script.py`. This keeps stdout visible and avoids the test framework entirely.
 2. **Use high-precision format strings** for floating-point debugging (e.g., `wp.printf("val=%.15e\n", x)`) — the default `%f` format hides values smaller than ~1e-6 that can still affect control flow.
 3. **Remove debug prints before committing.** `wp.printf` in kernels affects performance and will cause `check_output=True` tests to fail.
+
+## Cloud Agent
+
+These machines have no NVIDIA driver and no display. Warp prints a CUDA warning and runs on the `cpu` device.
+
+- Pass `--device cpu`, or call `wp.set_device("cpu")`, before launching kernels.
+- Examples default to the OpenGL viewer. Use `--viewer null` when no display is available.
+- `exercise1_ode_cannonball` starts paused, so a null viewer exits without stepping. Drive `newton.solvers.SolverExercise1ODECannonBall` directly for a headless check.
+- A short CPU suite that does run here: `uv run --extra dev -m newton.tests --no-cache-clear -k test_up_axis`.
